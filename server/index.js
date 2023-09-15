@@ -45,4 +45,18 @@ app.get('/sql', function(req,res){
     })
 })
 
+app.get('/sql/add/:imie/:nazwisko/:ocena', function(req, res){
+    const imie = req.params.imie
+    const nazwisko = req.params.nazwisko
+    const ocena = req.params.ocena
+
+    const sql = `INSERT INTO klasa (imie,nazwisko,ocena) VALUES ('${imie}','${nazwisko}','${ocena}')`
+    con.query(sql, function(err,result,fields){
+        if(err) {
+            console.log(err)
+            res.send("nie dodano")
+        } else res.send("dodano")
+    })
+})
+
 app.listen(port)
